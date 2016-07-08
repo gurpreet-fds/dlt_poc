@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C707D4001D14B32E00F39EBF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C707D3FF1D14B32E00F39EBF /* main.cpp */; };
+		C707D4081D14B38000F39EBF /* dltInc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C707D4071D14B38000F39EBF /* dltInc.cpp */; };
+		C707D40B1D30407D00F39EBF /* dltInc_wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C707D40A1D30407D00F39EBF /* dltInc_wrapper.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		C707D3FC1D14B32E00F39EBF /* DltInc_poc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DltInc_poc; sourceTree = BUILT_PRODUCTS_DIR; };
 		C707D3FF1D14B32E00F39EBF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		C707D4061D14B35600F39EBF /* dltInc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dltInc.h; sourceTree = "<group>"; };
+		C707D4071D14B38000F39EBF /* dltInc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dltInc.cpp; sourceTree = "<group>"; };
+		C707D4091D303E8C00F39EBF /* dltInc_wrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dltInc_wrapper.h; sourceTree = "<group>"; };
+		C707D40A1D30407D00F39EBF /* dltInc_wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dltInc_wrapper.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				C707D3FF1D14B32E00F39EBF /* main.cpp */,
+				C707D4061D14B35600F39EBF /* dltInc.h */,
+				C707D4071D14B38000F39EBF /* dltInc.cpp */,
+				C707D4091D303E8C00F39EBF /* dltInc_wrapper.h */,
+				C707D40A1D30407D00F39EBF /* dltInc_wrapper.cpp */,
 			);
 			path = DltInc_poc;
 			sourceTree = "<group>";
@@ -119,6 +129,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C707D4001D14B32E00F39EBF /* main.cpp in Sources */,
+				C707D40B1D30407D00F39EBF /* dltInc_wrapper.cpp in Sources */,
+				C707D4081D14B38000F39EBF /* dltInc.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +249,7 @@
 				C707D4051D14B32F00F39EBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

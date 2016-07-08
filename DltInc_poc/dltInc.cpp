@@ -64,10 +64,10 @@ int DltInc::init(nwKv& nodeWeightMap) {
     return ok;
 }
 
-void DltInc::addNodeTest(int numberOfNodes, int weight) {
-    for (int i = 0; i < numberOfNodes; i++) {
-        addNodesInBulk(1,2);
-    }
+void DltInc::addSingleNode(int nodeId, int absWeight) {
+    addNode(pair<int, float>(nodeId, absWeight));
+    //   printTable();
+    printTokensOwnedAllLevels();
 }
 
 void DltInc::addNodesInBulk(int numOfNodes, int weight, int wfactor) {
@@ -77,12 +77,13 @@ void DltInc::addNodesInBulk(int numOfNodes, int weight, int wfactor) {
         //   printTable();
         printTokensOwnedAllLevels();
     }
-
+/*
     while (nwMap.size() != replicas) {
         nwMapRIter riter = nwMap.rbegin();
         removeNode(riter->first);
         printTokensOwnedAllLevels();
     }
+ */
 //    printTokensOwnedAllLevels();
     
 }
@@ -553,7 +554,7 @@ int DltInc::reassignTokens(int nextAssignmentStartsHere, int giverId, int takerI
             curTokenNumber %= tokens;
         } while ((curTokenNumber != startingPoint));
     }
-    printTable();
+   // printTable();
     
     return startingPoint;
 
@@ -593,7 +594,10 @@ void DltInc::printTokensOwnedAllLevels() {
     }
     
     auto minmax = minmax_element(tokendb.begin(), tokendb.end(), comparator);
-    cout << "Nodes in cluster: " << nwMap.size();
+    cout << "Nodes in cluster: " << nwMap.size() << " --> ";
+    for (auto& eachNode: nwMap) {
+        cout << eachNode.first << " ";
+    }
    // << " max assigned: " << minmax.second->second << " min assigned: " << minmax.first->second;
   /*
     for (auto& entry: tokendb) {

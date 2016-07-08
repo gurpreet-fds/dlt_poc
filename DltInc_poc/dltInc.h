@@ -64,9 +64,10 @@ public:
     int printTokensToGive();
     int reassignTokens(int level, int giverId, int takerId, int numOfTokens, int optimum);
     void addNodesInBulk(int numOfNodes, int weight, int wfactor=0);
-    void addNodeTest(int numberOfNodes, int weight);
+    void addSingleNode(int nodeId, int absWeight);
     int reduceMarginToOptima();
     bool isNotPartOfTokenDltColumn(int column, int nodeId);
+    nwKv getKvMap() { return nwMap; }
     
 private:
     int** table;

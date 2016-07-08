@@ -6,42 +6,21 @@
 //  Copyright © 2016 Gurpreet Singh. All rights reserved.
 //
 
-#include "dltInc.h"
+#include "dltInc_wrapper.h"
 
-
-#define REPLICA_FACTOR 3
-#define TOTAL_TOKENS 256
-#define NUM_NODES_TO_ADD 2
-#define NUM_NODES_TO_STARTWITH 3
-#define WEIGHT_GAP 1
-#define BOOT_TIME_WEIGHT 2
-#define ADD_NODE_WITH_WEIGHT BOOT_TIME_WEIGHT
-#define WEIGHT_FACTOR 0
-
-DltInc::nwKv createTempKv(int numNodes, int idSeed, int startingWeight, int weightGap) {
-    DltInc::nwKv nodeWeightMap;
-    
-    for (int i = 0; i < numNodes; i++) {
-        nodeWeightMap[idSeed++] = DltInc::wInfo(startingWeight + weightGap*(i+1), 0);
-    }
-    return nodeWeightMap;
-}
-
-
-void testRun(int numberOfRuns, int numberOfNodesToAdd, int weight) {
-    for (int i = REPLICA_FACTOR; i <= numberOfRuns; i++) {
-        DltInc dlt(TOTAL_TOKENS, 3);
-
-        auto kv = createTempKv(i, 1, BOOT_TIME_WEIGHT, 0);
-        dlt.init(kv);
-        
-        dlt.addNodesInBulk(numberOfNodesToAdd, weight, WEIGHT_FACTOR);
-    }
-}
+const int NUM_NODES_TO_ADD = 5;
+const int ADD_NODE_WITH_WEIGHT = 2;
 
 int main(int argc, const char * argv[]) {
+    DltInc_wrapper dltWrapper;
+    dltWrapper.addNode(NUM_NODES_TO_ADD, ADD_NODE_WITH_WEIGHT);
 
-    testRun(NUM_NODES_TO_STARTWITH, NUM_NODES_TO_ADD, ADD_NODE_WITH_WEIGHT);
-
+    cout << "\n************************************************\n";
+    vector<int> nodesToRemove;
+    int i = NUM_NODES_TO_ADD + DltInc_wrapper::REPLICA_FACTOR;
+    for (; i > DltInc_wrapper::REPLICA_FACTOR; i--) {
+        nodesToRemove.push_back(i);
+    }
+    dltWrapper.removeNode(nodesToRemove);
     return 0;
 }
