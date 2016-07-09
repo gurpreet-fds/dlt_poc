@@ -46,46 +46,30 @@ int DltInc::init(nwKv& nodeWeightMap) {
         nw.second.second = tempRelWeight;
     }
     
-    
     // node id - weight map is filled. Calculate
     // optimal positions for the table.
-    auto maxSeed = 0;//assignTokens();
+    auto maxSeed = 0;
     l12associations.clear();
     l123associations.clear();
     fillDlt(table, maxSeed);
- //   printNodeWeightMap();
- //   printTokensOwned();
     fillTableFroml12Associations(1);
     fillTableFroml123Associations(2);
-   // printTable();
- //   printl12associations();
- //   printl123associations();
+    cout << "Base cluster configuration and token allocation\n";
     printTokensOwnedAllLevels();
     return ok;
 }
 
 void DltInc::addSingleNode(int nodeId, int absWeight) {
     addNode(pair<int, float>(nodeId, absWeight));
-    //   printTable();
-    printTokensOwnedAllLevels();
 }
 
 void DltInc::addNodesInBulk(int numOfNodes, int weight, int wfactor) {
-    //  printTable();
     for (int i = 0; i < numOfNodes; i++) {
-        addNode(pair<int, float>(nwMap.size()+1,weight + wfactor*i));
-        //   printTable();
+        auto nodeToAddId = nwMap.size()+1;
+        addNode(pair<int, float>(nodeToAddId, weight + wfactor*i));
+        cout << "Cluster config after add node: " << nodeToAddId << endl;
         printTokensOwnedAllLevels();
     }
-/*
-    while (nwMap.size() != replicas) {
-        nwMapRIter riter = nwMap.rbegin();
-        removeNode(riter->first);
-        printTokensOwnedAllLevels();
-    }
- */
-//    printTokensOwnedAllLevels();
-    
 }
 
 int DltInc::getTotalTokensOwned(int nodeId) {
@@ -117,7 +101,7 @@ void DltInc::printTokensOwned() {
     cout << endl;
 }
         
-int ** DltInc::createTempTable(int r, int t) {
+int** DltInc::createTempTable(int r, int t) {
     auto temptable = new int*[r];
     for (int i = 0; i < r; i++) {
         temptable[i] = new int[t];
@@ -137,36 +121,11 @@ void DltInc::destroyTempTable(int** temptable, int replicas) {
     delete[] temptable;
 }
 
-int DltInc::assignTokens() {
-    int maxSeed = 0;
-    float curMaxOptimum = std::numeric_limits<float>::min();
-    for (int t = 0; t < tokens; t++) {
-        auto localMaxOptimum = localOptima(t);
-        if (localMaxOptimum > curMaxOptimum) {
-            curMaxOptimum = localMaxOptimum;
-            maxSeed = t;
-        }
-    }
-    return maxSeed;
-}
+
 void DltInc::fillDlt(int **dlt, int seed) {
     assignPrimaries(dlt, seed);
     assignSecondaries(dlt, seed, 1);
     assignTertiaries(dlt, seed, 2);
-}
-
-int DltInc::localOptima(int seed) {
-
-    auto dlt = createTempTable(replicas, tokens);
-    fillDlt(dlt, seed);
-    auto localOptima = calculateOptimality(dlt, seed);
-    destroyTempTable(dlt, replicas);
-    return localOptima;
-}
-
-float DltInc::calculateOptimality(int** dlt, int seed) {
-    
-    return ok;
 }
 
 int DltInc::assignSecondaries(int **table, int seed, int replicaNum) {
@@ -184,17 +143,12 @@ int DltInc::assignSecondaries(int **table, int seed, int replicaNum) {
             int l12tokensToAssign = round(newRelWeight * tokensToAssign);
             // fix .5 case
             while (l12tokensToAssign && curTokenToAssignIter != l12associations[nodeId].end()) {
-           //     cout << curTokenToAssignIter->first << " here\n";
                 curTokenToAssignIter->second = l2iter->first;
                 l123associations[pair<int, int>(nodeId, l2iter->first)][curTokenToAssignIter->first] = -1;
                 l12tokensToAssign--;
                 curTokenToAssignIter++;
             }
-       //     cout << curTokenToAssignIter->first << " here - inner for\n";
         }
-        
-   //     printTable();
-    //    cout << curTokenToAssignIter->first << " here - outer for\n";
     }
     
     set<int> toUseNodes;
@@ -227,8 +181,6 @@ int DltInc::assignTertiaries(int **table, int seed, int replicaNum) {
             auto curIter = l123associations[curl12pair].begin();
             int tokensToAssign = l123associations[curl12pair].size();
             for (nwMapIter iter2 = nwMap.begin(); iter2 != nwMap.end(); ++iter2) {
-        //    for (reverse_iterator<nwMapIter> iter2 = nwMap.rbegin(); iter2 != nwMap.rend(); ++iter2) {
-        //        if (iterp == iter2.base() || iters == iter2.base()) {
                 if (iterp == iter2 || iters == iter2) {
                     continue;
                 }
@@ -244,7 +196,6 @@ int DltInc::assignTertiaries(int **table, int seed, int replicaNum) {
                     curIter++;
                 }
             }
-            //     printTable();
         }
     }
     
@@ -268,6 +219,7 @@ int DltInc::assignTertiaries(int **table, int seed, int replicaNum) {
 }
 
 int DltInc::findSuitableNode(set<int>& nodes, set<int>& nodesToUse) {
+    
     int chosenNode = -1;
 
     auto node = nodes.begin();
@@ -302,6 +254,7 @@ int DltInc::findSuitableNode(set<int>& nodes, set<int>& nodesToUse) {
 }
 
 void DltInc::fillTableFroml12Associations(int row) {
+    
     for (auto iter = l12associations.begin(); iter != l12associations.end(); ++iter) {
         for (auto iter2 = iter->second.begin(); iter2 != iter->second.end(); ++iter2) {
             table[row][iter2->first]  = iter2->second;
@@ -310,6 +263,7 @@ void DltInc::fillTableFroml12Associations(int row) {
 }
 
 void DltInc::fillTableFroml123Associations(int row) {
+    
     for (auto iter = l123associations.begin(); iter != l123associations.end(); ++iter) {
         for (auto iter2 = iter->second.begin(); iter2 != iter->second.end(); ++iter2) {
             table[row][iter2->first]  = iter2->second;
@@ -318,6 +272,7 @@ void DltInc::fillTableFroml123Associations(int row) {
 }
 
 int DltInc::assignPrimaries(int **table, int seed) {
+    
     int totalTokensAssigned = 0;
     for (auto &node: nwMap) {
         int tokensToAssign = node.second.second * tokens;
@@ -327,7 +282,6 @@ int DltInc::assignPrimaries(int **table, int seed) {
             int currentToken = seed++ % tokens;
             table[0][currentToken] = node.first;
             l12associations[node.first][currentToken] = -1;
-     //       cout << endl << " -> " << node.first << " -> " << currentToken;
         }
     }
 
@@ -336,7 +290,6 @@ int DltInc::assignPrimaries(int **table, int seed) {
         int currentToken = (seed++ % tokens);
         table[0][currentToken] = iter->first;
         l12associations[iter->first][currentToken] = -1;
-    //    cout << endl << " -> " << iter->first << " -> " << currentToken;
         iter++;
         if (iter == nwMap.end()) { iter = nwMap.begin(); }
     }
@@ -345,6 +298,7 @@ int DltInc::assignPrimaries(int **table, int seed) {
 }
 
 void DltInc::printNodeWeightMap() {
+    
     cout << "id - aw - rw" << endl;
     for (nwMapIter iter = nwMap.begin();
          iter != nwMap.end(); iter++) {
@@ -354,6 +308,7 @@ void DltInc::printNodeWeightMap() {
 }
 
 void DltInc::printTable() {
+    
     cout << "Dlt version: " << dltv << " rf: " << replicas << " tokens: " << tokens << endl;
     for (int i = 0; i < tokens; i++) {
         cout << i << " ";
@@ -366,6 +321,7 @@ void DltInc::printTable() {
 }
 
 void DltInc::printl12associations() {
+    
     cout << endl << "N " << "T " << "l12 ";
     for (auto iter = l12associations.begin(); iter != l12associations.end(); ++iter) {
         for (auto iter2 = iter->second.begin(); iter2 != iter->second.end(); ++iter2) {
@@ -374,7 +330,9 @@ void DltInc::printl12associations() {
     }
     cout << endl;
 }
+
 void DltInc::printl123associations() {
+    
     cout << endl << "N " << " T " << "l123 ";
     for (auto iter = l123associations.begin(); iter != l123associations.end(); ++iter) {
         for (auto iter2 = iter->second.begin(); iter2 != iter->second.end(); ++iter2) {
@@ -386,6 +344,7 @@ void DltInc::printl123associations() {
 }
 
 bool lessPair(pair<int, float>& lhs, pair<int, float>& rhs) {
+    
     if (lhs.second > rhs.second) {
         return true;
     } else {
@@ -394,15 +353,13 @@ bool lessPair(pair<int, float>& lhs, pair<int, float>& rhs) {
 }
 
 int DltInc::addNode(pair<int, float> nodeAndWeight) {
+    
     auto newClusterWeight = nodeAndWeight.second + totalClusterWeight;
     tokensToTransferVec.clear();
 
     for (auto& node: nwMap) {
         auto newRelWeight = float(node.second.first)/newClusterWeight;
         // update the new rel weight
- //       node.second.second = newRelWeight;
-        
-//        auto changedRelWeight = node.second.second - newRelWeight;
         auto changedRelWeight = ((float)getTotalTokensOwned(node.first))/(tokens * replicas) - newRelWeight;
         tokensToTransferVec.push_back(std::pair<int, float>(node.first, changedRelWeight * tokens));
     }
@@ -437,69 +394,8 @@ int DltInc::addNode(pair<int, float> nodeAndWeight) {
     return ok;
 }
 
-void DltInc::removeNode(int nodeId) {
-    if (nwMap.find(nodeId) == nwMap.end()) {
-        cout << "Node with id: " << nodeId << " not in cluster" << endl;
-        return;
-    }
-    auto newClusterWeight = totalClusterWeight - nwMap[nodeId].first;
-    tokensToTransferVec.clear();
-
-    nwMap.erase(nodeId);
-    
-    for (auto& node: nwMap) {
-        auto newRelWeight = float(node.second.first)/newClusterWeight;
-        // update the new rel weight
-        //       node.second.second = newRelWeight;
-        
-        //        auto changedRelWeight = node.second.second - newRelWeight;
-        auto changedRelWeight = newRelWeight - ((float)getTotalTokensOwned(node.first))/(tokens * replicas);
-        tokensToTransferVec.push_back(std::pair<int, float>(node.first, changedRelWeight * tokens));
-    }
-    
- //   sort(tokensToTransferVec.begin(), tokensToTransferVec.end(), lessPair);
-  //  int optimum = getTotalTokensOwned(nodeId);
-   /*
-    bool noMoreToAssign = false;
-    for (auto& takerNode : tokensToTransferVec) {
-        if (noMoreToAssign) {
-            break;
-        }
-        for (int level = 0; level < replicas; ++level) {
-            auto tokensToGiveOnThisLevel = round(takerNode.second);
-            noMoreToAssign = reassignTokens(level, nodeId, takerNode.first,
-                                            tokensToGiveOnThisLevel, optimum);
-            if (noMoreToAssign) {
-                break;
-            }
-        }
-    }
-  */
-    int nextAssignmentFrom = 0;
-    for (auto& takerNode : tokensToTransferVec) {
-        auto tokensToTransferOnThisLevel = round(takerNode.second);
-       // int optimum = (float(nwMap[takerNode.first].first)/newClusterWeight * replicas * tokens);
-        int optimum = round(takerNode.second) * replicas + getTotalTokensOwned(takerNode.first);
-        nextAssignmentFrom = reassignTokens(nextAssignmentFrom, nodeId, takerNode.first,
-                                            tokensToTransferOnThisLevel, optimum);
-    }
-    
-    //update all data structures to reflect new node.
-    totalClusterWeight = newClusterWeight;
-    
-    // update relative weights of existing nodes in the cluster.
-    for (auto& existingNode : nwMap) {
-        existingNode.second.second = float(existingNode.second.first)/totalClusterWeight;
-    }
-    
-    // increase the dlt version.
-    ++dltv;
-    
-    return;
-
-}
-
 bool DltInc::isNotPartOfTokenDltColumn(int column, int nodeId) {
+    
     for (int row = 0; row < replicas; ++row) {
         if (table[row][column] == nodeId) {
             return false;
@@ -507,28 +403,6 @@ bool DltInc::isNotPartOfTokenDltColumn(int column, int nodeId) {
     }
     return true;
 }
-
-int DltInc::reduceMarginToOptima() {
-    
-    return ok;
-}
-
-/*
-int DltInc::reassignTokens(int level, int giverId, int takerId, int numOfTokens, int optimum) {
-    int curTokenNumber = 0;
-    while (curTokenNumber < tokens) {
-        if (numOfTokens <= 0 || getTotalTokensOwned(takerId) >= optimum) {
-            return ok;
-        }
-        if (table[level][curTokenNumber] == giverId && isNotPartOfTokenDltColumn(curTokenNumber, takerId)) {
-            table[level][curTokenNumber] = takerId;
-            --numOfTokens;
-        }
-        ++curTokenNumber;
-    }
-    return ok;
-}
-*/
 
 int DltInc::reassignTokens(int nextAssignmentStartsHere, int giverId, int takerId, int tokensToGivePerLevel, int optimum) {
     
@@ -554,13 +428,13 @@ int DltInc::reassignTokens(int nextAssignmentStartsHere, int giverId, int takerI
             curTokenNumber %= tokens;
         } while ((curTokenNumber != startingPoint));
     }
-   // printTable();
     
     return startingPoint;
 
 }
 
 int DltInc::printTokensToGive() {
+    
     for (auto& node: tokensToTransferVec) {
         cout << endl << "node id: " << node.first << " ttg: " << node.second;
     }
@@ -569,6 +443,7 @@ int DltInc::printTokensToGive() {
 }
 
 bool comparator(pair<int, int> iterFirst, pair<int, int> iterSecond) {
+    
     if (iterFirst.second < iterSecond.second) {
         return true;
     } else {
@@ -577,6 +452,7 @@ bool comparator(pair<int, int> iterFirst, pair<int, int> iterSecond) {
 }
 
 void DltInc::printTokensOwnedAllLevels() {
+    
     map<int, int> tokendb;
     map<int, int> tokendbp;
     map<int, int> tokendbs;
@@ -598,46 +474,26 @@ void DltInc::printTokensOwnedAllLevels() {
     for (auto& eachNode: nwMap) {
         cout << eachNode.first << " ";
     }
-   // << " max assigned: " << minmax.second->second << " min assigned: " << minmax.first->second;
-  /*
-    for (auto& entry: tokendb) {
-        cout << endl << entry.first << " " << entry.second;
-    }
-  */
-     auto it = tokendb.begin();
-     auto itp = tokendbp.begin();
-     auto its = tokendbs.begin();
-     auto itt = tokendbt.begin();
-     
-     cout << endl;
-     auto nwMapIter1 = nwMap.begin();
-     cout << setw(4) << "Node" << setw(5) << "L1" << setw(5) << "L2" << setw(5) << "L3" << setw(8) << "Total" << endl;
-     while (nwMapIter1 != nwMap.end()) {
+ 
+    auto it = tokendb.begin();
+    auto itp = tokendbp.begin();
+    auto its = tokendbs.begin();
+    auto itt = tokendbt.begin();
 
-         cout  << setw(6) << it->first << ":" << setw(5) << itp->second
-               << setw(5) << its->second << setw(5) << itt->second << setw(8)
-               << it->second << setw(15) << "(optimum: "
-               << (nwMapIter1->second.second * replicas * tokens) << ")" << endl;
-        //       << setw(15) << "(variance:" << setw(3) << round((nwMapIter1->second.second * replicas * tokens) - it->second)  << ")" << endl;
-         if (it != tokendb.end()) ++it;
-         if (itp != tokendbp.end()) ++itp;
-         if (its != tokendbs.end()) ++its;
-         if (itt != tokendbt.end()) ++itt;
-         nwMapIter1++;
-     }
- /*   for (auto& entry: tokendbp) {
-        cout << endl << entry.first << " " << entry.second;
+    cout << endl;
+    auto nwMapIter1 = nwMap.begin();
+    cout << setw(4) << "Node" << setw(5) << "L1" << setw(5) << "L2" << setw(5) << "L3" << setw(8) << "Total" << endl;
+    while (nwMapIter1 != nwMap.end()) {
+        cout  << setw(3) << it->first << ":" << setw(5) << itp->second
+              << setw(5) << its->second << setw(5) << itt->second << setw(8)
+              << it->second << setw(15) << "(optimum: "
+              << (nwMapIter1->second.second * replicas * tokens) << ")" << endl;
+        if (it != tokendb.end()) ++it;
+        if (itp != tokendbp.end()) ++itp;
+        if (its != tokendbs.end()) ++its;
+        if (itt != tokendbt.end()) ++itt;
+        nwMapIter1++;
     }
     
-    cout << "\ntotal # of secondary tokens:";
-    for (auto& entry: tokendbs) {
-        cout << endl << entry.first << " " << entry.second;
-    }
-    
-    cout << "\ntotal # of tertiary tokens:";
-    for (auto& entry: tokendbt) {
-        cout << endl << entry.first << " " << entry.second;
-    }
-   */
     cout << endl;
 }

@@ -20,27 +20,35 @@ void DltInc_wrapper::addNode(int numberOfNodesToAdd, int weight) {
 }
 
 void DltInc_wrapper::removeNode(vector<int>& nodesToRemoveVec) {
+    
+    cout << "Cluster config before remove node\n";
+    finalDlt->printTokensOwnedAllLevels();
+    
+    auto tempKv = finalDlt->getKvMap();
     for (auto& nodeToRemove : nodesToRemoveVec) {
-        auto tempKv = finalDlt->getKvMap();
         tempKv.erase(nodeToRemove);
         for (auto& kvEntry : tempKv) {
             kvEntry.second.second = 0;
         }
-        
-        DltInc::nwKv initialKv;
-        while ((initialKv.size() < REPLICA_FACTOR) && (tempKv.size() > 0)) {
-            initialKv.insert(*(tempKv.begin()));
-            tempKv.erase(tempKv.begin());
-        }
-        
-        DltInc* dlt = new DltInc(TOTAL_TOKENS, REPLICA_FACTOR);
-        dlt->init(initialKv);
-        
-        for (auto& kvEntry : tempKv) {
-            dlt->addSingleNode(kvEntry.first, kvEntry.second.first);
-        }
-        finalDlt.reset(dlt);
     }
+    DltInc::nwKv initialKv;
+    while ((initialKv.size() < REPLICA_FACTOR) && (tempKv.size() > 0)) {
+        initialKv.insert(*(tempKv.begin()));
+        tempKv.erase(tempKv.begin());
+    }
+    
+    DltInc* dlt = new DltInc(TOTAL_TOKENS, REPLICA_FACTOR);
+    dlt->init(initialKv);
+    
+    for (auto& kvEntry : tempKv) {
+        dlt->addSingleNode(kvEntry.first, kvEntry.second.first);
+    }
+    finalDlt.reset(dlt);
+
+    cout << "Cluster config after remove node for node(s):";
+    for (auto& nodeToRemove : nodesToRemoveVec) { cout << nodeToRemove << ","; }
+    cout << endl;
+    finalDlt->printTokensOwnedAllLevels();
 }
 
 
