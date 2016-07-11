@@ -17,8 +17,8 @@ Apart from that, please refer to the note below:
  
   The optimum configurations:
   Num of Tokens ---> maximum number of SMs a cluster should have
-   256                 ~24 nodes
-   512                 ~48 nodes
+   256 tokens   --->    ~24 nodes
+   512 tokens   --->   ~48 nodes
   and so on.
  
  
