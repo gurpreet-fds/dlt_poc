@@ -1,0 +1,476 @@
+Below is the example output for algorithm, given 256 token, upto 25 nodes. 
+* Starting with 3 node cluster, it adds 22 nodes. 
+* And then removes a bunch of nodes from the cluster
+
+
+Base cluster configuration and token allocation
+Nodes in cluster: 3 --> 1 2 3 
+Node   L1   L2   L3   Total
+  1:   86   86   84     256     (optimum: 256)
+  2:   85   85   86     256     (optimum: 256)
+  3:   85   85   86     256     (optimum: 256)
+
+Cluster config after add node: 4
+Nodes in cluster: 4 --> 1 2 3 4 
+Node   L1   L2   L3   Total
+  1:   65   65   63     193     (optimum: 192)
+  2:   64   64   65     193     (optimum: 192)
+  3:   64   64   65     193     (optimum: 192)
+  4:   63   63   63     189     (optimum: 192)
+
+Cluster config after add node: 5
+Nodes in cluster: 5 --> 1 2 3 4 5 
+Node   L1   L2   L3   Total
+  1:   52   52   50     154     (optimum: 153.6)
+  2:   51   51   52     154     (optimum: 153.6)
+  3:   51   51   52     154     (optimum: 153.6)
+  4:   51   51   51     153     (optimum: 153.6)
+  5:   51   51   51     153     (optimum: 153.6)
+
+Cluster config after add node: 6
+Nodes in cluster: 6 --> 1 2 3 4 5 6 
+Node   L1   L2   L3   Total
+  1:   43   43   41     127     (optimum: 128)
+  2:   42   42   43     127     (optimum: 128)
+  3:   42   42   43     127     (optimum: 128)
+  4:   43   43   43     129     (optimum: 128)
+  5:   43   43   44     130     (optimum: 128)
+  6:   43   43   42     128     (optimum: 128)
+
+Cluster config after add node: 7
+Nodes in cluster: 7 --> 1 2 3 4 5 6 7 
+Node   L1   L2   L3   Total
+  1:   37   37   35     109     (optimum: 109.714)
+  2:   36   36   37     109     (optimum: 109.714)
+  3:   36   36   38     110     (optimum: 109.714)
+  4:   37   37   37     111     (optimum: 109.714)
+  5:   36   36   37     109     (optimum: 109.714)
+  6:   37   37   36     110     (optimum: 109.714)
+  7:   37   37   36     110     (optimum: 109.714)
+
+Cluster config after add node: 8
+Nodes in cluster: 8 --> 1 2 3 4 5 6 7 8 
+Node   L1   L2   L3   Total
+  1:   33   33   31      97     (optimum: 96)
+  2:   32   32   33      97     (optimum: 96)
+  3:   31   31   33      95     (optimum: 96)
+  4:   32   32   32      96     (optimum: 96)
+  5:   32   32   33      97     (optimum: 96)
+  6:   32   32   31      95     (optimum: 96)
+  7:   32   32   31      95     (optimum: 96)
+  8:   32   32   32      96     (optimum: 96)
+
+Cluster config after add node: 9
+Nodes in cluster: 9 --> 1 2 3 4 5 6 7 8 9 
+Node   L1   L2   L3   Total
+  1:   29   29   27      85     (optimum: 85.3333)
+  2:   28   28   29      85     (optimum: 85.3333)
+  3:   28   28   30      86     (optimum: 85.3333)
+  4:   28   28   28      84     (optimum: 85.3333)
+  5:   28   28   29      85     (optimum: 85.3333)
+  6:   29   29   28      86     (optimum: 85.3333)
+  7:   29   29   30      88     (optimum: 85.3333)
+  8:   28   28   28      84     (optimum: 85.3333)
+  9:   29   29   27      85     (optimum: 85.3333)
+
+Cluster config after add node: 10
+Nodes in cluster: 10 --> 1 2 3 4 5 6 7 8 9 10 
+Node   L1   L2   L3   Total
+  1:   26   26   24      76     (optimum: 76.8)
+  2:   25   25   26      76     (optimum: 76.8)
+  3:   25   25   27      77     (optimum: 76.8)
+  4:   26   26   26      78     (optimum: 76.8)
+  5:   25   25   26      76     (optimum: 76.8)
+  6:   26   26   25      77     (optimum: 76.8)
+  7:   25   25   26      76     (optimum: 76.8)
+  8:   26   26   27      79     (optimum: 76.8)
+  9:   26   26   24      76     (optimum: 76.8)
+ 10:   26   26   25      77     (optimum: 76.8)
+
+Cluster config after add node: 11
+Nodes in cluster: 11 --> 1 2 3 4 5 6 7 8 9 10 11 
+Node   L1   L2   L3   Total
+  1:   24   24   22      70     (optimum: 69.8182)
+  2:   23   23   24      70     (optimum: 69.8182)
+  3:   23   23   25      71     (optimum: 69.8182)
+  4:   23   23   23      69     (optimum: 69.8182)
+  5:   23   23   24      70     (optimum: 69.8182)
+  6:   24   24   23      71     (optimum: 69.8182)
+  7:   23   23   24      70     (optimum: 69.8182)
+  8:   23   23   24      70     (optimum: 69.8182)
+  9:   24   24   22      70     (optimum: 69.8182)
+ 10:   24   24   23      71     (optimum: 69.8182)
+ 11:   22   22   22      66     (optimum: 69.8182)
+
+Cluster config after add node: 12
+Nodes in cluster: 12 --> 1 2 3 4 5 6 7 8 9 10 11 12 
+Node   L1   L2   L3   Total
+  1:   22   22   20      64     (optimum: 64)
+  2:   21   21   22      64     (optimum: 64)
+  3:   21   21   23      65     (optimum: 64)
+  4:   21   21   21      63     (optimum: 64)
+  5:   21   21   22      64     (optimum: 64)
+  6:   22   22   21      65     (optimum: 64)
+  7:   21   21   22      64     (optimum: 64)
+  8:   21   21   22      64     (optimum: 64)
+  9:   22   22   20      64     (optimum: 64)
+ 10:   22   22   21      65     (optimum: 64)
+ 11:   21   21   21      63     (optimum: 64)
+ 12:   21   21   21      63     (optimum: 64)
+
+Cluster config after add node: 13
+Nodes in cluster: 13 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 
+Node   L1   L2   L3   Total
+  1:   20   20   18      58     (optimum: 59.0769)
+  2:   19   19   20      58     (optimum: 59.0769)
+  3:   19   19   21      59     (optimum: 59.0769)
+  4:   20   20   20      60     (optimum: 59.0769)
+  5:   19   19   20      58     (optimum: 59.0769)
+  6:   20   20   19      59     (optimum: 59.0769)
+  7:   19   19   20      58     (optimum: 59.0769)
+  8:   19   19   20      58     (optimum: 59.0769)
+  9:   20   20   18      58     (optimum: 59.0769)
+ 10:   20   20   19      59     (optimum: 59.0769)
+ 11:   20   20   21      61     (optimum: 59.0769)
+ 12:   21   21   21      63     (optimum: 59.0769)
+ 13:   20   20   19      59     (optimum: 59.0769)
+
+Cluster config after add node: 14
+Nodes in cluster: 14 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 
+Node   L1   L2   L3   Total
+  1:   19   19   17      55     (optimum: 54.8571)
+  2:   18   18   19      55     (optimum: 54.8571)
+  3:   18   18   20      56     (optimum: 54.8571)
+  4:   18   18   18      54     (optimum: 54.8571)
+  5:   18   18   19      55     (optimum: 54.8571)
+  6:   19   19   18      56     (optimum: 54.8571)
+  7:   18   18   19      55     (optimum: 54.8571)
+  8:   18   18   19      55     (optimum: 54.8571)
+  9:   19   19   17      55     (optimum: 54.8571)
+ 10:   19   19   18      56     (optimum: 54.8571)
+ 11:   18   18   19      55     (optimum: 54.8571)
+ 12:   18   18   18      54     (optimum: 54.8571)
+ 13:   19   19   18      56     (optimum: 54.8571)
+ 14:   17   17   17      51     (optimum: 54.8571)
+
+Cluster config after add node: 15
+Nodes in cluster: 15 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 
+Node   L1   L2   L3   Total
+  1:   18   18   16      52     (optimum: 51.2)
+  2:   17   17   18      52     (optimum: 51.2)
+  3:   16   16   18      50     (optimum: 51.2)
+  4:   17   17   17      51     (optimum: 51.2)
+  5:   17   17   18      52     (optimum: 51.2)
+  6:   17   17   16      50     (optimum: 51.2)
+  7:   17   17   18      52     (optimum: 51.2)
+  8:   17   17   18      52     (optimum: 51.2)
+  9:   18   18   16      52     (optimum: 51.2)
+ 10:   17   17   16      50     (optimum: 51.2)
+ 11:   17   17   18      52     (optimum: 51.2)
+ 12:   17   17   17      51     (optimum: 51.2)
+ 13:   17   17   16      50     (optimum: 51.2)
+ 14:   17   17   17      51     (optimum: 51.2)
+ 15:   17   17   17      51     (optimum: 51.2)
+
+Cluster config after add node: 16
+Nodes in cluster: 16 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 
+Node   L1   L2   L3   Total
+  1:   17   17   15      49     (optimum: 48)
+  2:   16   16   17      49     (optimum: 48)
+  3:   15   15   17      47     (optimum: 48)
+  4:   16   16   16      48     (optimum: 48)
+  5:   16   16   17      49     (optimum: 48)
+  6:   16   16   15      47     (optimum: 48)
+  7:   16   16   17      49     (optimum: 48)
+  8:   16   16   17      49     (optimum: 48)
+  9:   17   17   15      49     (optimum: 48)
+ 10:   16   16   15      47     (optimum: 48)
+ 11:   16   16   17      49     (optimum: 48)
+ 12:   16   16   16      48     (optimum: 48)
+ 13:   16   16   15      47     (optimum: 48)
+ 14:   16   16   16      48     (optimum: 48)
+ 15:   16   16   16      48     (optimum: 48)
+ 16:   15   15   15      45     (optimum: 48)
+
+Cluster config after add node: 17
+Nodes in cluster: 17 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 
+Node   L1   L2   L3   Total
+  1:   16   16   14      46     (optimum: 45.1765)
+  2:   15   15   16      46     (optimum: 45.1765)
+  3:   14   14   16      44     (optimum: 45.1765)
+  4:   15   15   15      45     (optimum: 45.1765)
+  5:   15   15   16      46     (optimum: 45.1765)
+  6:   15   15   14      44     (optimum: 45.1765)
+  7:   15   15   16      46     (optimum: 45.1765)
+  8:   15   15   16      46     (optimum: 45.1765)
+  9:   16   16   14      46     (optimum: 45.1765)
+ 10:   15   15   14      44     (optimum: 45.1765)
+ 11:   15   15   16      46     (optimum: 45.1765)
+ 12:   15   15   15      45     (optimum: 45.1765)
+ 13:   15   15   14      44     (optimum: 45.1765)
+ 14:   15   15   15      45     (optimum: 45.1765)
+ 15:   15   15   15      45     (optimum: 45.1765)
+ 16:   15   15   15      45     (optimum: 45.1765)
+ 17:   15   15   15      45     (optimum: 45.1765)
+
+Cluster config after add node: 18
+Nodes in cluster: 18 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 
+Node   L1   L2   L3   Total
+  1:   15   15   13      43     (optimum: 42.6667)
+  2:   14   14   15      43     (optimum: 42.6667)
+  3:   14   14   16      44     (optimum: 42.6667)
+  4:   14   14   14      42     (optimum: 42.6667)
+  5:   14   14   15      43     (optimum: 42.6667)
+  6:   15   15   14      44     (optimum: 42.6667)
+  7:   14   14   15      43     (optimum: 42.6667)
+  8:   14   14   15      43     (optimum: 42.6667)
+  9:   15   15   13      43     (optimum: 42.6667)
+ 10:   15   15   14      44     (optimum: 42.6667)
+ 11:   14   14   15      43     (optimum: 42.6667)
+ 12:   14   14   14      42     (optimum: 42.6667)
+ 13:   15   15   14      44     (optimum: 42.6667)
+ 14:   14   14   14      42     (optimum: 42.6667)
+ 15:   14   14   14      42     (optimum: 42.6667)
+ 16:   14   14   14      42     (optimum: 42.6667)
+ 17:   14   14   14      42     (optimum: 42.6667)
+ 18:   13   13   13      39     (optimum: 42.6667)
+
+Cluster config after add node: 19
+Nodes in cluster: 19 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 
+Node   L1   L2   L3   Total
+  1:   14   14   12      40     (optimum: 40.4211)
+  2:   13   13   14      40     (optimum: 40.4211)
+  3:   13   13   15      41     (optimum: 40.4211)
+  4:   13   13   13      39     (optimum: 40.4211)
+  5:   13   13   14      40     (optimum: 40.4211)
+  6:   14   14   13      41     (optimum: 40.4211)
+  7:   13   13   14      40     (optimum: 40.4211)
+  8:   13   13   14      40     (optimum: 40.4211)
+  9:   14   14   12      40     (optimum: 40.4211)
+ 10:   14   14   13      41     (optimum: 40.4211)
+ 11:   13   13   14      40     (optimum: 40.4211)
+ 12:   13   13   13      39     (optimum: 40.4211)
+ 13:   14   14   13      41     (optimum: 40.4211)
+ 14:   13   14   14      41     (optimum: 40.4211)
+ 15:   14   14   14      42     (optimum: 40.4211)
+ 16:   14   14   14      42     (optimum: 40.4211)
+ 17:   14   14   14      42     (optimum: 40.4211)
+ 18:   13   13   13      39     (optimum: 40.4211)
+ 19:   14   13   13      40     (optimum: 40.4211)
+
+Cluster config after add node: 20
+Nodes in cluster: 20 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 
+Node   L1   L2   L3   Total
+  1:   13   13   11      37     (optimum: 38.4)
+  2:   13   13   14      40     (optimum: 38.4)
+  3:   12   12   14      38     (optimum: 38.4)
+  4:   13   13   13      39     (optimum: 38.4)
+  5:   13   13   14      40     (optimum: 38.4)
+  6:   13   13   12      38     (optimum: 38.4)
+  7:   13   13   14      40     (optimum: 38.4)
+  8:   12   12   14      38     (optimum: 38.4)
+  9:   13   13   11      37     (optimum: 38.4)
+ 10:   13   13   12      38     (optimum: 38.4)
+ 11:   12   12   13      37     (optimum: 38.4)
+ 12:   13   13   13      39     (optimum: 38.4)
+ 13:   13   13   12      38     (optimum: 38.4)
+ 14:   12   13   13      38     (optimum: 38.4)
+ 15:   13   13   13      39     (optimum: 38.4)
+ 16:   13   13   13      39     (optimum: 38.4)
+ 17:   13   13   13      39     (optimum: 38.4)
+ 18:   13   13   13      39     (optimum: 38.4)
+ 19:   13   12   12      37     (optimum: 38.4)
+ 20:   13   13   12      38     (optimum: 38.4)
+
+Cluster config after add node: 21
+Nodes in cluster: 21 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 
+Node   L1   L2   L3   Total
+  1:   13   13   11      37     (optimum: 36.5714)
+  2:   12   12   13      37     (optimum: 36.5714)
+  3:   12   12   14      38     (optimum: 36.5714)
+  4:   12   12   12      36     (optimum: 36.5714)
+  5:   12   12   13      37     (optimum: 36.5714)
+  6:   13   13   12      38     (optimum: 36.5714)
+  7:   12   12   13      37     (optimum: 36.5714)
+  8:   12   12   14      38     (optimum: 36.5714)
+  9:   13   13   11      37     (optimum: 36.5714)
+ 10:   13   13   12      38     (optimum: 36.5714)
+ 11:   12   12   13      37     (optimum: 36.5714)
+ 12:   12   12   12      36     (optimum: 36.5714)
+ 13:   13   13   12      38     (optimum: 36.5714)
+ 14:   12   13   13      38     (optimum: 36.5714)
+ 15:   12   12   12      36     (optimum: 36.5714)
+ 16:   12   12   12      36     (optimum: 36.5714)
+ 17:   12   12   12      36     (optimum: 36.5714)
+ 18:   12   12   12      36     (optimum: 36.5714)
+ 19:   13   12   12      37     (optimum: 36.5714)
+ 20:   13   13   12      38     (optimum: 36.5714)
+ 21:    9    9    9      27     (optimum: 36.5714)
+
+Cluster config after add node: 22
+Nodes in cluster: 22 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 
+Node   L1   L2   L3   Total
+  1:   12   12   11      35     (optimum: 34.9091)
+  2:   12   12   13      37     (optimum: 34.9091)
+  3:   11   11   13      35     (optimum: 34.9091)
+  4:   12   12   12      36     (optimum: 34.9091)
+  5:   11   11   12      34     (optimum: 34.9091)
+  6:   12   12   11      35     (optimum: 34.9091)
+  7:   11   11   12      34     (optimum: 34.9091)
+  8:   11   11   13      35     (optimum: 34.9091)
+  9:   12   12   10      34     (optimum: 34.9091)
+ 10:   12   12   11      35     (optimum: 34.9091)
+ 11:   11   11   12      34     (optimum: 34.9091)
+ 12:   12   12   12      36     (optimum: 34.9091)
+ 13:   12   12   11      35     (optimum: 34.9091)
+ 14:   11   12   12      35     (optimum: 34.9091)
+ 15:   12   12   12      36     (optimum: 34.9091)
+ 16:   12   12   12      36     (optimum: 34.9091)
+ 17:   12   12   12      36     (optimum: 34.9091)
+ 18:   12   12   12      36     (optimum: 34.9091)
+ 19:   13   12   12      37     (optimum: 34.9091)
+ 20:   12   12   11      35     (optimum: 34.9091)
+ 21:    9    9    9      27     (optimum: 34.9091)
+ 22:   12   12   11      35     (optimum: 34.9091)
+
+Cluster config after add node: 23
+Nodes in cluster: 23 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 
+Node   L1   L2   L3   Total
+  1:   11   11   10      32     (optimum: 33.3913)
+  2:   11   11   12      34     (optimum: 33.3913)
+  3:   11   11   13      35     (optimum: 33.3913)
+  4:   11   11   11      33     (optimum: 33.3913)
+  5:   11   11   12      34     (optimum: 33.3913)
+  6:   12   12   11      35     (optimum: 33.3913)
+  7:   11   11   12      34     (optimum: 33.3913)
+  8:   11   11   13      35     (optimum: 33.3913)
+  9:   12   12   10      34     (optimum: 33.3913)
+ 10:   11   11   10      32     (optimum: 33.3913)
+ 11:   11   11   12      34     (optimum: 33.3913)
+ 12:   11   11   11      33     (optimum: 33.3913)
+ 13:   12   12   11      35     (optimum: 33.3913)
+ 14:   11   12   12      35     (optimum: 33.3913)
+ 15:   11   11   11      33     (optimum: 33.3913)
+ 16:   11   11   11      33     (optimum: 33.3913)
+ 17:   11   11   11      33     (optimum: 33.3913)
+ 18:   11   11   11      33     (optimum: 33.3913)
+ 19:   12   11   11      34     (optimum: 33.3913)
+ 20:   11   11   10      32     (optimum: 33.3913)
+ 21:    9    9    9      27     (optimum: 33.3913)
+ 22:   12   12   11      35     (optimum: 33.3913)
+ 23:   11   11   11      33     (optimum: 33.3913)
+
+Cluster config after add node: 24
+Nodes in cluster: 24 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 
+Node   L1   L2   L3   Total
+  1:   11   11   10      32     (optimum: 32)
+  2:   10   10   11      31     (optimum: 32)
+  3:   10   10   12      32     (optimum: 32)
+  4:   11   11   11      33     (optimum: 32)
+  5:   10   10   11      31     (optimum: 32)
+  6:   11   11   10      32     (optimum: 32)
+  7:   11   11   12      34     (optimum: 32)
+  8:   10   10   12      32     (optimum: 32)
+  9:   11   11    9      31     (optimum: 32)
+ 10:   11   11   10      32     (optimum: 32)
+ 11:   10   10   12      32     (optimum: 32)
+ 12:   11   11   11      33     (optimum: 32)
+ 13:   11   11   10      32     (optimum: 32)
+ 14:   10   11   11      32     (optimum: 32)
+ 15:   11   11   11      33     (optimum: 32)
+ 16:   11   11   11      33     (optimum: 32)
+ 17:   11   11   11      33     (optimum: 32)
+ 18:   11   11   11      33     (optimum: 32)
+ 19:   11   10   10      31     (optimum: 32)
+ 20:   11   11   10      32     (optimum: 32)
+ 21:    9    9    9      27     (optimum: 32)
+ 22:   11   11   10      32     (optimum: 32)
+ 23:   11   11   11      33     (optimum: 32)
+ 24:   11   11   10      32     (optimum: 32)
+
+Cluster config after add node: 25
+Nodes in cluster: 25 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 
+Node   L1   L2   L3   Total
+  1:   11   11   10      32     (optimum: 30.72)
+  2:   10   10   11      31     (optimum: 30.72)
+  3:   10   10   12      32     (optimum: 30.72)
+  4:   10   10   10      30     (optimum: 30.72)
+  5:   10   10   11      31     (optimum: 30.72)
+  6:   11   11   10      32     (optimum: 30.72)
+  7:   10   10   11      31     (optimum: 30.72)
+  8:   10   10   12      32     (optimum: 30.72)
+  9:   11   11    9      31     (optimum: 30.72)
+ 10:   11   11   10      32     (optimum: 30.72)
+ 11:   10   10   12      32     (optimum: 30.72)
+ 12:   10   10   10      30     (optimum: 30.72)
+ 13:   11   11   10      32     (optimum: 30.72)
+ 14:   10   11   11      32     (optimum: 30.72)
+ 15:   10   10   10      30     (optimum: 30.72)
+ 16:   10   10   10      30     (optimum: 30.72)
+ 17:   10   10   10      30     (optimum: 30.72)
+ 18:   10   10   10      30     (optimum: 30.72)
+ 19:   11   10   10      31     (optimum: 30.72)
+ 20:   11   11   10      32     (optimum: 30.72)
+ 21:    9    9    9      27     (optimum: 30.72)
+ 22:   11   11   10      32     (optimum: 30.72)
+ 23:   10   10   10      30     (optimum: 30.72)
+ 24:   11   11   10      32     (optimum: 30.72)
+ 25:    8    8    8      24     (optimum: 30.72)
+
+
+************************************************
+
+Cluster config before remove node
+Nodes in cluster: 25 --> 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 
+Node   L1   L2   L3   Total
+  1:   11   11   10      32     (optimum: 30.72)
+  2:   10   10   11      31     (optimum: 30.72)
+  3:   10   10   12      32     (optimum: 30.72)
+  4:   10   10   10      30     (optimum: 30.72)
+  5:   10   10   11      31     (optimum: 30.72)
+  6:   11   11   10      32     (optimum: 30.72)
+  7:   10   10   11      31     (optimum: 30.72)
+  8:   10   10   12      32     (optimum: 30.72)
+  9:   11   11    9      31     (optimum: 30.72)
+ 10:   11   11   10      32     (optimum: 30.72)
+ 11:   10   10   12      32     (optimum: 30.72)
+ 12:   10   10   10      30     (optimum: 30.72)
+ 13:   11   11   10      32     (optimum: 30.72)
+ 14:   10   11   11      32     (optimum: 30.72)
+ 15:   10   10   10      30     (optimum: 30.72)
+ 16:   10   10   10      30     (optimum: 30.72)
+ 17:   10   10   10      30     (optimum: 30.72)
+ 18:   10   10   10      30     (optimum: 30.72)
+ 19:   11   10   10      31     (optimum: 30.72)
+ 20:   11   11   10      32     (optimum: 30.72)
+ 21:    9    9    9      27     (optimum: 30.72)
+ 22:   11   11   10      32     (optimum: 30.72)
+ 23:   10   10   10      30     (optimum: 30.72)
+ 24:   11   11   10      32     (optimum: 30.72)
+ 25:    8    8    8      24     (optimum: 30.72)
+
+Base cluster configuration and token allocation
+Nodes in cluster: 3 --> 1 3 5 
+Node   L1   L2   L3   Total
+  1:   86   86   84     256     (optimum: 256)
+  3:   85   85   86     256     (optimum: 256)
+  5:   85   85   86     256     (optimum: 256)
+
+Cluster config after remove node for node(s):0,2,4,6,8,10,12,14,16,18,20,22,24,
+Nodes in cluster: 13 --> 1 3 5 7 9 11 13 15 17 19 21 23 25 
+Node   L1   L2   L3   Total
+  1:   20   20   18      58     (optimum: 59.0769)
+  3:   19   19   20      58     (optimum: 59.0769)
+  5:   19   19   21      59     (optimum: 59.0769)
+  7:   20   20   20      60     (optimum: 59.0769)
+  9:   19   19   20      58     (optimum: 59.0769)
+ 11:   20   20   19      59     (optimum: 59.0769)
+ 13:   19   19   20      58     (optimum: 59.0769)
+ 15:   19   19   20      58     (optimum: 59.0769)
+ 17:   20   20   18      58     (optimum: 59.0769)
+ 19:   20   20   19      59     (optimum: 59.0769)
+ 21:   20   20   21      61     (optimum: 59.0769)
+ 23:   21   21   21      63     (optimum: 59.0769)
+ 25:   20   20   19      59     (optimum: 59.0769)
+
+Program ended with exit code: 0
