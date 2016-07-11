@@ -70,6 +70,7 @@ public:
 
     nwKv getKvMap() { return nwMap; }
     
+    // Find nodes to assign for secondary/tertiary ownership allocations.
     int findSuitableNode(set<int>& nodes, set<int>& nodesToUse);
 
     // Reassigns tokens for a giverId node to takerId node
